@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sabor & Arte — Cardápio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="fundo" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+  </div>
+
+  <header class="topo">
+    <div class="topo-inner">
+      <div class="marca">
+        <div class="logo" aria-hidden="true">🍽</div>
+        <div>
+          <p class="tagline">Cozinha contemporânea</p>
+          <h1>Sabor & Arte</h1>
+        </div>
+      </div>
+      <div class="status-api" id="statusApi" title="Status da API">
+        <span class="status-ponto"></span>
+        <span class="status-texto">Verificando…</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="resumo" aria-label="Resumo do cardápio">
+      <article class="stat">
+        <span class="stat-icone" aria-hidden="true">◇</span>
+        <div>
+          <p class="stat-valor" id="statTotal">0</p>
+          <p class="stat-label">Pratos no cardápio</p>
+        </div>
+      </article>
+      <article class="stat stat-destaque">
+        <span class="stat-icone" aria-hidden="true">◆</span>
+        <div>
+          <p class="stat-valor" id="statPrecoMedio">R$ 0,00</p>
+          <p class="stat-label">Preço médio</p>
+        </div>
+      </article>
+    </section>
+
+    <div class="layout-principal">
+      <section class="painel" aria-labelledby="titulo-form">
+        <div class="painel-cabecalho">
+          <h2 id="titulo-form">Novo prato</h2>
+          <p class="intro">Cadastre um item no cardápio do restaurante.</p>
+        </div>
+
+        <form id="formPrato" class="formulario">
+          <div class="campo">
+            <label for="nome">Nome do prato</label>
+            <input type="text" id="nome" placeholder="Risoto de cogumelos" required maxlength="150" autocomplete="off">
+          </div>
+
+          <div class="campo">
+            <label for="categoria">Categoria</label>
+            <select id="categoria" required>
+              <option value="">Selecione…</option>
+              <option>Entrada</option>
+              <option>Prato principal</option>
+              <option>Sobremesa</option>
+              <option>Bebida</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" rows="3" placeholder="Ingredientes e detalhes (opcional)" maxlength="500"></textarea>
+            <span class="dica">Opcional</span>
+          </div>
+
+          <div class="campo">
+            <label for="preco">Preço</label>
+            <div class="input-moeda">
+              <span class="prefixo">R$</span>
+              <input type="number" id="preco" step="0.01" min="0.01" placeholder="0,00" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-principal" id="btnSubmit">
+            <span class="btn-texto">Adicionar ao cardápio</span>
+            <span class="btn-loading" hidden>Salvando…</span>
+          </button>
+        </form>
+
+        <div id="mensagem" class="toast" role="status" hidden></div>
+      </section>
+
+      <section class="catalogo" aria-labelledby="titulo-cardapio">
+        <div class="catalogo-cabecalho">
+          <div>
+            <h2 id="titulo-cardapio">Cardápio</h2>
+            <p class="intro">Pratos cadastrados — dados vindos da API e do MySQL.</p>
+          </div>
+          <button type="button" class="btn-secundario" id="btnAtualizar" title="Recarregar lista">
+            ↻ Atualizar
+          </button>
+        </div>
+
+        <div id="carregando" class="carregando" hidden>
+          <span class="spinner"></span>
+          <span>Carregando cardápio…</span>
+        </div>
+
+        <div id="gridPratos" class="grid-pratos" role="list"></div>
+
+        <div id="estadoVazio" class="estado-vazio" hidden>
+          <div class="estado-icone" aria-hidden="true">🍴</div>
+          <h3>Nenhum prato ainda</h3>
+          <p>Cadastre o primeiro item usando o formulário ao lado.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <p>Projeto educacional — Front (HTML/CSS/JS) → API FastAPI → MySQL → API → Front.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
